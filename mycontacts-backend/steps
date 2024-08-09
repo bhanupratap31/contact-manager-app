@@ -1,0 +1,31 @@
+1. create project folder and backend folder.
+2. In the backend folder do initialise npm (npm init)
+3. npm install express and npm i -D nodemon
+4. create server.js file, import express and create express app and listen statement for a port
+5. For port, create .env variable and set port to 8001. listen on port 8001 using ${PORT}
+6. create routes by importing express and intialising express.Router()
+7. create controllers and import the controller.js file in routes to use the controller logic for routes
+8. create an error handler to handle error in controller.js file like no data found, forbidden etc.
+9. since we are going to use mongodb and mongoose, whenever we interact with these two we always get promise that we need to resolve. So in controller all the routes logic having function will contain async like async(req,res).
+10. Whenever we use async and we need to catch an error, we use try-catch block. But we can use the middleware express async handler to take care of exception handling inside async express routes and then it passes them to errorhandler.js
+11. install express-async-handler
+12. do mongo db setup, collection > create> overview> connect> mongodb compass> copy connection string > open mongo plugin> add connection, then go to mongodb driver, copy the url and use as CONNECTION_STRING in .env file.
+13. Create config folder, here we will use mongoose which is Object Model Design Schema for entities like Contacts, user. It helps to communicate with MongoDB database.
+14. In config file create dbConnection.js and then call the function from server.js
+15. create a models folder where we will define the schema for the DB
+16. now we can store data in real database. Import contactModel in controller.
+17. after adding test the api using postman for CRUD operations (get, post, put, delete).
+18. now add user routes(endpoints) for login, registration , once user logs in they can use an access token to manage the contacts.
+19. Once routes are defined, create controller for the same and import it to userRoutes.
+20. Now create the functionality of registration and login by defining user model first.
+21. Once the schema is created in user model, move to controller to write the logic of registration and login.
+22. While registering the user, hash the password using bcrypt, create the user in database and send response to user containing id and email
+23. Create endpoint for the user so that whenever a user logs in we get an access token, for that we can use JSON web token.
+    There are 3 parts in jwt, 1st part (header) contains algo and type (jwt). 2nd part (payload) contains the actual info. 3rd part is signature verification.
+24. Whenever the user provides the login and password, user will be given the access token after matching the password.
+25. Once the payload is created, we need to create an access token secret and expiration time of the token generated post which user will not be able to call the api.
+26. Create access token secret in the .env file.
+27. Now once you are able to get the token after log in. Secure all the routes so that only the validated user could access those routes.
+28. For that we need to create a middleware which will validate whether the token provided by user is correct i.e. associated with a correct user or not.
+29. Now in order to secure the routes, we need to associate the contact with user id who has created the contact.
+30. That can be done by adding userid in model schema in user models
